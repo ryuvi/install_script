@@ -1,58 +1,39 @@
 #!/bin/bash
 
-check_os() {
+# ----------------------- #
+#        FUNCTIONS        #
+# ----------------------- #
+install_pckg() {
     OS=$1
-    if [[ $OS == 'ARCH' ]];
+    APP=$2
+
+    echo "#####-#####-#####-#####-#####"
+    echo "#####-#####-#####-#####-#####"
+    echo "#####                   #####"
+    echo "#####       $APP        #####"
+    echo "#####                   #####"
+    echo "#####-#####-#####-#####-#####"
+    echo "#####-#####-#####-#####-#####"
+
+    if [[ $OS == 'arch' ]]
     then
-        EXEC='sudo pacman -Syyuu --noconfirm'
+
+        sudo pacman -S --noconfirm $APP
+
     else
-        EXEC='sudo apt install -y'
+
+        sudo apt install -y $APP
+
     fi
 }
 
-check_os $1
-
 # ----------------------- #
-# INSTALL NORMAL PACKAGES #
+#    INSTALL PACKAGES     #
 # ----------------------- #
+OSID=`cat /etc/os-release | grep ID_LIKE | grep -o '[a-z]' | tr -d '\n'`
 
-# INSTALL DEPENDENCIES
-$EXEC curl
+while read LINE; do
+    
+    install_pckg $OSID $LINE
 
-# INSTALL ZSH AND OH-MY-ZSH
-$EXEC zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# THEME "refined"
-
-# INSTALL NVIM
-$EXEC neovim
-
-# INSTALL GIT
-$EXEC git
-
-# INSTALL WINE
-$EXEC wine
-
-# INSTALL LUTRIS
-$EXEC lutris
-
-# INSTALL QBITTORRENT
-$EXEC qbittorrent
-
-# INSTALL EMACS
-$EXEC emacs
-
-# INSTALL VSCODE
-$EXEC code
-
-# INSTALL LUA
-$EXEC lua
-
-
-
-# -------------------- #
-# INSTALL AUR PACKAGES #
-# -------------------- #
-
-# INSTALL VSCODIUM
-# $EXEC vscodium-bin
+done < app_list;
