@@ -33,14 +33,19 @@ finish_oh-my-zsh() {
 
     # INSTALL ZINIT
     sh -c "$(curl -fsSL https://git.io/zinit-install)"
-    
+
     FAST_SYNTAX="zinit light zdharma-continuum/fast-syntax-highlighting"
     ZSH_AUTOSUGGESTIONS="zinit light zsh-users/zsh-autosuggestions"
     ZSH_COMPLETIONS="zinit light zsh-users/zsh-completions"
-    
+
     echo $FAST_SYNTAX >> $HOME/.zshrc
     echo $ZSH_AUTOSUGGESTIONS >> $HOME/.zshrc
     echo $ZSH_COMPLETIONS >> $HOME/.zshrc
+}
+
+config_vim() {
+    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+    sh ~/.vim_runtime/install_awesome_vimrc.sh
 }
 
 # ----------------------- #
@@ -49,7 +54,13 @@ finish_oh-my-zsh() {
 OSID=`cat /etc/os-release | grep ID_LIKE | grep -o '[a-z]' | tr -d '\n'`
 
 while read LINE; do
-    
+
     install_pckg $OSID $LINE
 
 done < app_list;
+
+# ----------------------- #
+#     CALLING CONFIGS     #
+# ----------------------- #
+finish_oh-my-zsh
+config_vim
