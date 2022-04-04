@@ -1,4 +1,5 @@
 curl
+wget
 zsh
 vim
 git
@@ -25,4 +26,6 @@ mysql
 php
 php-apache
 phpmyadmin
-
+alacritty
+steam
+filezilla
