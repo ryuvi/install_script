@@ -20,3 +20,9 @@ openjdk-doc
 openjdk-src
 peek
 docker
+apache
+mysql
+php
+php-apache
+phpmyadmin
+
