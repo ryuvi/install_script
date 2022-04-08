@@ -51,16 +51,65 @@ config_vim() {
     sh ~/.vim_runtime/install_awesome_vimrc.sh
 }
 
+install_hyper() {
+    wget -c --content-disposition https://releases.hyper.is/download/AppImage
+
+    mv Hyper*.AppImage $HOME/Applications
+}
+
+install_term() {
+    echo -e "Which terminal emulator you want to use?\n [1] alacritty\n [2] tilix\n [3] xterm\n [4] hyper"
+    read ANSWER
+
+    case $ANSWER in
+        1 || "alacritty") install_pckg $OSID alacritty ;;
+        2 || "tilix") install_pckg $OSID tilix ;;
+        3 || "xterm") install_pckg $OSID xterm ;;
+        4 || "hyper") install_hyper ;;
+    esac
+}
+
+install_dock() {
+    echo -e "Which dock app you want to use?\n [1] plank\n [2] latte-dock"
+    read ANSWER
+
+    case $ANSWER in
+        1 || "plank") install_pckg $OSID plank ;;
+        2 || "latte-dock") install_pckg $OSID latte-dock ;;
+    esac
+}
+
+install_texteditor() {
+    echo -e "Which text editor you want to use?\n [1] vim\n [2] neovim\n [3] emacs"
+    read $ANSWER
+
+    case $ANSWER in
+        1 || "vim") install_pckg $OSID vim ;;
+        2 || "neovim") install_pckg $OSID neovim ;;
+        3 || "emacs") install_pckg $OSID emacs ;;
+    esac
+}
+
 # ----------------------- #
 #    INSTALL PACKAGES     #
 # ----------------------- #
 OSID=`cat /etc/os-release | grep ID_LIKE | grep -o '[a-z]' | tr -d '\n'`
 
 while read LINE; do
-
-    install_pckg $OSID $LINE
+    INST_APP=`which $LINE`
+    
+    if [[ -n $INST_APP ]]
+    then
+        install_pckg $OSID $LINE
+    fi
 
 done < app_list;
+
+gem install rails
+
+install_term
+install_dock
+install_texteditor
 
 # ----------------------- #
 #     CALLING CONFIGS     #

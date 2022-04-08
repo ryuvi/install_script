@@ -1,19 +1,16 @@
 curl
 wget
 zsh
-vim
 git
 wine
 lutris
 qbittorrent
-emacs
 code
 lua
 ttf-fira-code
 go
 nodejs
 yarn
-plank
 jre-openjdk-headless
 jre-openjdk
 jdk-openjdk
@@ -26,6 +23,6 @@ mysql
 php
 php-apache
 phpmyadmin
-alacritty
 steam
 filezilla
+sqlite3
