@@ -1,0 +1,21 @@
+config.plugins.autocomplete = true
+config.plugins.autoinsert = true
+config.plugins.bracketmatch = true
+config.plugins.colorpreview = true
+config.plugins.eofnewline_xl = true
+config.plugins.ghmarkdown = true
+config.plugins.gitstatus = true
+config.plugins.language_elixir = true
+config.plugins.language_go = true
+config.plugins.language_hs = true
+config.plugins.language_ini = true
+config.plugins.language_perl = true
+config.plugins.language_php = true
+config.plugins.language_ruby = true
+config.plugins.language_rust = true
+config.plugins.language_sass = true
+config.plugins.language_sh = true
+config.plugins.memoryusage = true
+config.plugins.minimap = true
+config.plugins.rainbowparen = true
+
