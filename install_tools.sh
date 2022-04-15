@@ -13,6 +13,12 @@ else
     INSTALLER=sudo apt install -y
 fi
 
+if [[ ! -e $HOME/Application ]]
+then
+    mkdir $HOME/Application
+fi
+
+
 
 # ---------------------------------- #
 #                                    #
@@ -66,6 +72,8 @@ esac
 
 $INSTALLER code
 
+wget -c --composite-content https://github.com/lite-xl/lite-xl/releases/latest/download/LiteXL-x86_64.AppImage
+mv LiteXL-*.AppImage $HOME/Applications
 
 
 # -------------------------------- #
@@ -158,8 +166,12 @@ $INSTALLER nodejs yarn
 $INSTALLER lua \
     go \
     docker \
+    docker-compose \
     ruby \
-    filezilla
+    filezilla \
+    python3 \
+    nasm \
+    bochs
 
 gem install rails
 
@@ -175,3 +187,4 @@ $INSTALLER wine \
     qbittorrent \
     peek \
     steam
+
