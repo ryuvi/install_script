@@ -171,9 +171,51 @@ $INSTALLER lua \
     filezilla \
     python3 \
     nasm \
-    bochs
+    bochs \
+    redis
 
 gem install rails
+
+
+
+# LUA
+git clone https://github.com/love2d/love
+
+if [[ $OS == "arch" ]]
+then
+    $INSTALLER luajit \
+    freetype2 \
+    mpg123 \
+    openal \
+    libvorbis \
+    libtheora \
+    libmodplug \
+    sdl2 \
+    shared-mime-info \
+    hicolor-icon-theme \
+    desktop-file-utils
+
+else
+    $INSTALLER build-essential \
+    autotools-dev \
+    automake libtool \
+    pkg-config \
+    libfreetype6-dev \
+    libluajit-5.1-dev \
+    libphysfs-dev \
+    libsdl2-dev \
+    libopenal-dev \
+    libogg-dev \
+    libvorbis-dev \
+    libmodplug-dev \
+    libmpg123-dev \
+    libtheora-dev
+fi
+
+cd love
+./platform/unix/automagic
+./configure
+make
 
 
 
