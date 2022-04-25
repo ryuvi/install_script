@@ -39,15 +39,7 @@ $INSTALLER curl \
 #        ZSH ENVIRONMENT        #
 #                               #
 # ----------------------------- #
-$INSTALLER zsh
-
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-sh -c "$(curl -fsSL https://git.io/zinit-install)"
-
-echo "Inserting the zinit configuration on .zshrc ..."
-echo "zinit light zdharma-continuum/fast-syntax-highlighting" >> $HOME/.zshrc
-echo "zinit light zsh-users/zsh-autosuggestions" >> $HOME/.zshrc
-echo "zinit light zsh-users/zsh-completions" >> $HOME/.zshrc
+. ./install_zsh_oh_my_zsh.sh
 
 
 
@@ -131,7 +123,7 @@ $INSTALLER jre-openjdk-headless jre-openjdk jdk-openjdk openjdk-doc openjdk-src
 #         PHP CONFIGURATION        #
 #                                  #
 # -------------------------------- #
-$INSTALLER apache php php-apache phpmyadmin
+. ./install_php_environment.sh
 
 
 
@@ -173,44 +165,12 @@ gem install rails
 
 
 
-# LOVE
-git clone https://github.com/love2d/love
-
-if [[ $OS == "arch" ]]
-then
-    $INSTALLER luajit \
-    freetype2 \
-    mpg123 \
-    openal \
-    libvorbis \
-    libtheora \
-    libmodplug \
-    sdl2 \
-    shared-mime-info \
-    hicolor-icon-theme \
-    desktop-file-utils
-
-else
-    $INSTALLER build-essential \
-    autotools-dev \
-    automake libtool \
-    pkg-config \
-    libfreetype6-dev \
-    libluajit-5.1-dev \
-    libphysfs-dev \
-    libsdl2-dev \
-    libopenal-dev \
-    libogg-dev \
-    libvorbis-dev \
-    libmodplug-dev \
-    libmpg123-dev \
-    libtheora-dev
-fi
-
-cd love
-./platform/unix/automagic
-./configure
-make
+# --------------------- #
+#                       #
+#        LOVE 2D        #
+#                       #
+# --------------------- #
+. ./install_love2d.sh
 
 
 
