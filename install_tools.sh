@@ -5,20 +5,20 @@
 #        OS SETTER        #
 #                         #
 # ----------------------- #
-OS=`cat /etc/os-release | grep ID_LIKE | grep -o '[a-z]' | tr -d '\n'`
+OS=`sudo cat /etc/os-release | grep ID_LIKE | grep -o '[a-z]' | tr -d '\n'`
 
 if [[ $OS == 'arch' ]]; then
-    INSTALLER=sudo pacman -S --noconfirm
+    INSTALLER="sudo pacman -S --noconfirm"
+    sudo pacman -Syyuu --noconfirm
 else
-    INSTALLER=sudo apt install -y
+    INSTALLER="sudo apt install -y"
+    sudo apt upgrade -y
 fi
 
-if [[ ! -e $HOME/Application ]]
+if [[ ! -e $HOME/Applications ]]
 then
-    mkdir $HOME/Application
+    mkdir $HOME/Applications
 fi
-
-
 
 # ---------------------------------- #
 #                                    #
@@ -27,8 +27,10 @@ fi
 # ---------------------------------- #
 $INSTALLER curl \
     wget \
+    vim \
     git \
     ttf-fira-code \
+    base-devel
 
 
 
@@ -59,20 +61,20 @@ read TEXT_EDITOR_ANSWER
 
 case $TEXT_EDITOR_ANSWER in
 
-    1 || "vim")
+    1 | "vim")
         $INSTALLER vim
         git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
         sh ~/.vim_runtime/install_awesome_vimrc.sh
         ;;
 
-    2 || "neovim") $INSTALLER neovim ;;
-    3 || "emacs") $INSTALLER emacs ;;
+    2 | "neovim") $INSTALLER neovim ;;
+    3 | "emacs") $INSTALLER emacs ;;
 
 esac
 
 $INSTALLER code
 
-wget -c --composite-content https://github.com/lite-xl/lite-xl/releases/latest/download/LiteXL-x86_64.AppImage
+wget -c --content-disposition https://github.com/lite-xl/lite-xl/releases/latest/download/LiteXL-x86_64.AppImage
 mv LiteXL-*.AppImage $HOME/Applications
 
 
@@ -86,10 +88,10 @@ read TERM_ANSWER
 
 case $TERM_ANSWER in
 
-    1 || "alacritty") $INSTALLER alacritty ;;
-    2 || "tilix") $INSTALLER tilix ;;
-    3 || "xterm") $INSTALLER xterm ;;
-    4 || "hyper")
+    1 | "alacritty") $INSTALLER alacritty ;;
+    2 | "tilix") $INSTALLER tilix ;;
+    3 | "xterm") $INSTALLER xterm ;;
+    4 | "hyper")
         wget -c --content-disposition https://releases.hyper.is/download/AppImage
         mv Hyper*.AppImage $HOME/Applications
     ;;
@@ -108,8 +110,8 @@ read DOCK_ANSWER
 
 case $DOCK_ANSWER in
 
-    1 || "plank") $INSTALLER plank ;;
-    2 || "latte-dock") $INSTALLER latte-dock ;;
+    1 | "plank") $INSTALLER plank ;;
+    2 | "latte-dock") $INSTALLER latte-dock ;;
 
 esac
 
@@ -120,11 +122,7 @@ esac
 #        JAVA CONFIGURATION        #
 #                                  #
 # -------------------------------- #
-$INSTALLER jre-openjdk-headless \
-    jre-openjdk \
-    jdk-openjdk \
-    openjdk-doc \
-    openjdk-src
+$INSTALLER jre-openjdk-headless jre-openjdk jdk-openjdk openjdk-doc openjdk-src
 
 
 
@@ -133,10 +131,7 @@ $INSTALLER jre-openjdk-headless \
 #         PHP CONFIGURATION        #
 #                                  #
 # -------------------------------- #
-$INSTALLER apache \
-    php \
-    php-apache \
-    phpmyadmin
+$INSTALLER apache php php-apache phpmyadmin
 
 
 
@@ -178,7 +173,7 @@ gem install rails
 
 
 
-# LUA
+# LOVE
 git clone https://github.com/love2d/love
 
 if [[ $OS == "arch" ]]
