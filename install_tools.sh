@@ -30,7 +30,8 @@ $INSTALLER curl \
     vim \
     git \
     ttf-fira-code \
-    base-devel
+    base-devel \
+    doas
 
 
 
@@ -183,5 +184,5 @@ $INSTALLER wine \
     lutris \
     qbittorrent \
     peek \
-    steam
-
+    steam \
+    calligra
