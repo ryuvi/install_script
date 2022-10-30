@@ -1,0 +1,66 @@
+#+title: ENVIRONMENT INSTALL
+#+author: Vicente Rafael
+
+* TABLE OF CONTENT
+
+
+* FUNDAMENTALS
+
+#+BEGIN_SRC shell
+
+install() {
+    app=$1
+    echo "Install App $app? (y/n)"
+    read answer
+
+    if [ $answer -eq 'y' ]; then
+        sudo pacman -S --noconfirm $app
+    fi
+}
+
+#+END_SRC
+
+* BASE
+
+#+BEGIN_SRC shell
+
+install curl
+install wget
+install vim
+install git
+install ttf-fira-code
+install base-devel
+install doas
+
+#+END_SRC
+
+* ZSH
+
+#+BEGIN_SRC shell
+
+install zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://git.io/zinit-install)"
+echo -e "zinit light zdharma-continuum/fast-syntax-highlighting\nzinit light zsh-users/zsh-autosuggestions\nzinit light zsh-users/zsh-completions" >> $HOME/.zshrc
+
+#+END_SRC
+
+* EMACS
+
+#+BEGIN_SRC shell
+
+install emacs
+install ripgrep
+install fd
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+. ~/.emacs.d/bin/doom install
+
+#+END_SRC
+
+* TERM
+
+#+BEGIN_SRC shell
+
+install alacritty
+
+#+END_SRC
