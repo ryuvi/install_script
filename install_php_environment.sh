@@ -32,7 +32,7 @@ $start_soft httpd
 $status_soft httpd
 
 # INSTALL AND CONFIGURE MYSQL
-$install mysql
+$install mariadb
 
 sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 
